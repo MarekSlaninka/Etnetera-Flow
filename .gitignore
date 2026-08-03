@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Firebase CLI
+.firebase/
+
+# Scratch
+tmp/
+
+# Local agent tooling
+AGENTS.md
+.codex/
+
+# Firebase app config, supplied separately
+Etnetera-Flow/GoogleService-Info.plist
+!Etnetera-Flow/GoogleService-Info.plist.example
