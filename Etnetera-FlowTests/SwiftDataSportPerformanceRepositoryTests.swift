@@ -124,6 +124,28 @@ struct SwiftDataSportPerformanceRepositoryTests {
     }
 
     @Test
+    func fetchesAtMostOnePageAndKeepsTheNewest() async throws {
+        let recorder = PerformanceRecorder()
+
+        _ = try await repository.observePerformances(
+            onUpdate: { recorder.record($0) },
+            onError: { recorder.record($0) }
+        )
+
+        for index in 0 ..< (PerformanceFeed.pageSize + 10) {
+            try await repository.save(
+                .stub(
+                    name: "Performance \(index)",
+                    createdAt: Date(timeIntervalSince1970: TimeInterval(index))
+                )
+            )
+        }
+
+        #expect(recorder.latest.count == PerformanceFeed.pageSize)
+        #expect(recorder.latest.first?.name == "Performance \(PerformanceFeed.pageSize + 9)")
+    }
+
+    @Test
     func storedPerformancesAreReportedAsLocal() async throws {
         let recorder = PerformanceRecorder()
 

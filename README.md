@@ -13,7 +13,7 @@ An iOS app for recording sport performances, where every entry is stored either 
 ## Requirements
 
 - Xcode 26 or newer
-- iOS 27 deployment target (also builds for macOS 26.6)
+- iOS 26 deployment target (also builds for macOS 26)
 - Swift Package Manager resolves [firebase-ios-sdk](https://github.com/firebase/firebase-ios-sdk) on first open
 
 ## Running the app
@@ -69,9 +69,24 @@ The domain entity carries no serialization: `SportPerformanceRecord` is the Swif
 xcodebuild -project Etnetera-Flow.xcodeproj -scheme Etnetera-Flow -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
 ```
 
-58 tests in 8 suites, written with Swift Testing. They cover the parts worth protecting: storage routing and the merged feed, ordering across both sources, search, filtering, SwiftData persistence against an in-memory container, and the form view models.
+66 tests in 9 suites, written with Swift Testing. They cover the parts worth protecting: storage routing and the merged feed, ordering across both sources, search, filtering, SwiftData persistence against an in-memory container, and the form view models.
 
 `StubSportPerformanceRepository` stands in for both backing stores, so nothing in the suite touches Firebase or the disk — the tests run without network access or a Firebase project.
+
+## Scaling
+
+The feed is capped at `PerformanceFeed.pageSize` (100) entries per source: `.limit(to:)` on the Firestore query, `fetchLimit` on the SwiftData descriptor. Snapshots are applied incrementally through `PerformanceSnapshotBuffer` using `snapshot.documentChanges`, so adding one document decodes one document rather than re-decoding the entire collection.
+
+That covers the two costs that grow fastest — billed document reads on every cold start, and decoding work on the main actor for every change. What it does not do is page beyond the first 100, and the honest reason is that pagination conflicts with the rest of the design:
+
+- **Search would silently narrow.** Filtering runs client-side over what is loaded. Paging in 100 at a time means a query only ever searches the loaded pages, and a matching entry from last year simply would not appear. Firestore has no substring operator either — only prefix ranges — so real full-text search needs a normalized search field or an external index.
+- **Merging two paginated sources needs a cursor on each.** Interleaving by `createdAt` across a local and a remote page means tracking both cursors and always drawing from whichever side holds the newer record.
+
+Given that, a partial implementation that quietly breaks search seemed worse than a documented limit. The next steps I would take, in order:
+
+1. Move `SportPerformanceRepository` off `@MainActor` so decoding and mapping leave the main thread, hopping back only to publish results.
+2. Replace the manual `publishChanges()` in the SwiftData repository with incremental change notifications, so a write stops re-fetching the page.
+3. Add cursor-based paging on both sources, together with a server-side search field, so the two land as one change rather than one breaking the other.
 
 ## Firestore
 

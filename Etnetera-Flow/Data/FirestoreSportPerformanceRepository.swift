@@ -32,8 +32,11 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
         onError: @escaping (Error) -> Void
     ) async throws -> any PerformanceObservation {
         let userIdentifier = try await userIdentifierProvider.identifier()
+        let buffer = PerformanceSnapshotBuffer()
+
         let listener = collection(for: userIdentifier)
             .order(by: SportPerformanceDocument.createdAtField, descending: true)
+            .limit(to: PerformanceFeed.pageSize)
             .addSnapshotListener { snapshot, error in
                 MainActor.assumeIsolated {
                     if let error {
@@ -42,7 +45,10 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
                         return
                     }
 
-                    onUpdate(Self.performances(from: snapshot))
+                    guard let snapshot else { return }
+
+                    Self.apply(snapshot.documentChanges, to: buffer)
+                    onUpdate(buffer.ordered)
                 }
             }
 
@@ -85,15 +91,24 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
         }
     }
 
-    private static func performances(from snapshot: QuerySnapshot?) -> [SportPerformance] {
-        guard let snapshot else { return [] }
+    private static func apply(
+        _ changes: [DocumentChange],
+        to buffer: PerformanceSnapshotBuffer
+    ) {
+        for change in changes {
+            let identifier = change.document.documentID
 
-        return snapshot.documents.compactMap { document in
+            guard change.type != .removed else {
+                buffer.remove(identifier)
+                continue
+            }
+
             do {
-                return try document.data(as: SportPerformanceDocument.self).domainModel()
+                let document = try change.document.data(as: SportPerformanceDocument.self)
+                buffer.insert(try document.domainModel(), for: identifier)
             } catch {
-                Self.logger.error("Skipping performance \(document.documentID, privacy: .public): \(error.localizedDescription, privacy: .public)")
-                return nil
+                logger.error("Skipping performance \(identifier, privacy: .public): \(error.localizedDescription, privacy: .public)")
+                buffer.remove(identifier)
             }
         }
     }
