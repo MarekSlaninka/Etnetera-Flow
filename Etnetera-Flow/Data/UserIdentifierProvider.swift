@@ -1,35 +1,33 @@
 import FirebaseAuth
 
-protocol UserIdentifierProviding {
+protocol UserIdentifierProviding: Sendable {
     func identifier() async throws -> String
 }
 
-final class UserIdentifierProvider: UserIdentifierProviding {
+/// Resolves the anonymous Firebase user backing every remote document.
+///
+/// Sign-in is deduplicated: concurrent callers await the same task instead of
+/// each starting their own `signInAnonymously`, which would create several
+/// anonymous accounts and let a write land under a different uid than the one
+/// the snapshot listener is watching.
+actor UserIdentifierProvider: UserIdentifierProviding {
+    private var signIn: Task<String, Error>?
+
     func identifier() async throws -> String {
         if let user = Auth.auth().currentUser {
             return user.uid
         }
 
-        return try await withCheckedThrowingContinuation { continuation in
-            Auth.auth().signInAnonymously { result, error in
-                if let error {
-                    continuation.resume(throwing: error)
-                } else if let result {
-                    continuation.resume(returning: result.user.uid)
-                } else {
-                    continuation.resume(
-                        throwing: AuthenticationError.missingAuthenticatedUser
-                    )
-                }
-            }
+        if let signIn {
+            return try await signIn.value
         }
-    }
-}
 
-private enum AuthenticationError: LocalizedError {
-    case missingAuthenticatedUser
+        let task = Task {
+            try await Auth.auth().signInAnonymously().user.uid
+        }
+        signIn = task
+        defer { signIn = nil }
 
-    var errorDescription: String? {
-        "Firebase did not return an authenticated user."
+        return try await task.value
     }
 }

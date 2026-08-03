@@ -34,7 +34,7 @@ Then open the project, wait for Xcode to resolve the Firebase package, and build
 open Etnetera-Flow.xcodeproj
 ```
 
-`Etnetera-Flow/GoogleService-Info.plist.example` shows the expected structure if you would rather point the app at your own Firebase project. In that case create an iOS app with bundle ID `ms.sk.etnetera.flow`, enable **Anonymous** sign-in under Authentication, create a Firestore database, and deploy `firestore.rules`.
+`GoogleService-Info.plist.example` in the repository root shows the expected structure if you would rather point the app at your own Firebase project. In that case create an iOS app with bundle ID `ms.sk.etnetera.flow`, enable **Anonymous** sign-in under Authentication, create a Firestore database, and deploy `firestore.rules`.
 
 Remote entries are scoped to an anonymous Firebase Auth user, so each device gets its own private set of documents.
 
@@ -58,7 +58,9 @@ The key seam is `SportPerformanceRepository`, defined in `Domain` and implemente
 
 Because view models depend only on the protocol, `PreviewData.swift` can supply an in-memory double for SwiftUI previews without touching either backing store.
 
-Use cases (`SaveSportPerformanceUseCase`, `UpdateSportPerformanceUseCase`, `DeleteSportPerformanceUseCase`) hold the validation rules, keeping the view models limited to presentation state.
+Use cases (`SaveSportPerformanceUseCase`, `UpdateSportPerformanceUseCase`, `DeleteSportPerformanceUseCase`) name the write operations the app supports and are the only way the view models reach the repository. Input validation and trimming currently sit in the view models, so the use cases stay thin — they are a seam for rules that do not exist yet rather than a place where logic lives today.
+
+The domain entity carries no serialization: `SportPerformanceRecord` is the SwiftData model and `SportPerformanceDocument` the Firestore one, each mapping to and from `SportPerformance` at the edge of `Data`.
 
 ## Firestore
 

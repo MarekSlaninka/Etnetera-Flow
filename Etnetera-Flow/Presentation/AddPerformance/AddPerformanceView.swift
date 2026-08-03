@@ -68,7 +68,7 @@ struct AddPerformanceView: View {
                     Button(action: dismiss.callAsFunction) {
                         Image(systemName: "xmark")
                     }
-                    .accessibilityLabel("Zavrieť")
+                    .accessibilityLabel(Text("action.close"))
                 }
             }
             .alert(isPresented: Binding(

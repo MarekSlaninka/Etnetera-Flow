@@ -22,14 +22,23 @@ final class StorageRoutingSportPerformanceRepository: SportPerformanceRepository
             onUpdate: { merger.updateLocal($0) },
             onError: onError
         )
-        let remoteObservation = try await remoteRepository.observePerformances(
-            onUpdate: { merger.updateRemote($0) },
-            onError: onError
-        )
 
-        return CompositePerformanceObservation(
-            observations: [localObservation, remoteObservation]
-        )
+        do {
+            let remoteObservation = try await remoteRepository.observePerformances(
+                onUpdate: { merger.updateRemote($0) },
+                onError: onError
+            )
+
+            return CompositePerformanceObservation(
+                observations: [localObservation, remoteObservation]
+            )
+        } catch {
+            // Attaching the remote listener needs an anonymous sign-in, which
+            // fails while offline. Report it, but keep the local observation
+            // alive rather than leaking it and leaving the list empty.
+            onError(error)
+            return CompositePerformanceObservation(observations: [localObservation])
+        }
     }
 
     func save(_ performance: SportPerformance) async throws {

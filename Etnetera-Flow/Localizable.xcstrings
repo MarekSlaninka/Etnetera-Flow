@@ -1,498 +1,520 @@
 {
-  "sourceLanguage" : "sk",
-  "strings" : {
-    "action.cancel" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Zrušit"
+  "sourceLanguage": "sk",
+  "strings": {
+    "action.cancel": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Zrušit"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zrušiť"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zrušiť"
           }
         }
       }
     },
-    "action.delete" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Smazat"
+    "action.close": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zavřít"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vymazať"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zavrieť"
           }
         }
       }
     },
-    "action.edit" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Upravit"
+    "action.delete": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Smazat"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Upraviť"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať"
           }
         }
       }
     },
-    "action.saveChanges" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Uložit změny"
+    "action.edit": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Upravit"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save Changes"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uložiť zmeny"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upraviť"
           }
         }
       }
     },
-    "alert.failed.confirm" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "OK"
+    "action.saveChanges": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Uložit změny"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "OK"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save Changes"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uložiť zmeny"
           }
         }
       }
     },
-    "alert.failed.message" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Neznámá chyba"
+    "alert.failed.confirm": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "OK"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Unknown error"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "OK"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neznáma chyba"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         }
       }
     },
-    "alert.failed.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Uložení se nezdařilo"
+    "alert.failed.message": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Neznámá chyba"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Saving Failed"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Unknown error"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uloženie zlyhalo"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neznáma chyba"
           }
         }
       }
     },
-    "alert.saved.confirm" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Hotovo"
+    "alert.failed.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Uložení se nezdařilo"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Done"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Saving Failed"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hotovo"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uloženie zlyhalo"
           }
         }
       }
     },
-    "alert.saved.message" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Záznam najdeš v seznamu výkonů."
+    "alert.saved.confirm": {
+      "extractionState": "stale",
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Hotovo"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "The record is now in your performance list."
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Done"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Záznam nájdeš v zozname výkonov."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hotovo"
           }
         }
       }
     },
-    "alert.saved.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Výkon uložen"
+    "alert.saved.message": {
+      "extractionState": "stale",
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Záznam najdeš v seznamu výkonů."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Performance Saved"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "The record is now in your performance list."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Výkon uložený"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Záznam nájdeš v zozname výkonov."
           }
         }
       }
     },
-    "duration.hoursAndMinutes" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%d h %d min"
+    "alert.saved.title": {
+      "extractionState": "stale",
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Výkon uložen"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%d h %d min"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Performance Saved"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d h %d min"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Výkon uložený"
           }
         }
       }
     },
-    "duration.minutes" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%d min"
+    "duration.hoursAndMinutes": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "%d h %d min"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%d min"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "%d h %d min"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d min"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d h %d min"
           }
         }
       }
     },
-    "empty.description" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Přidej svůj první sportovní záznam."
+    "duration.minutes": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "%d min"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Add your first sports record."
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "%d min"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pridaj svoj prvý športový záznam."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d min"
           }
         }
       }
     },
-    "empty.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Žádné výkony"
+    "empty.description": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Přidej svůj první sportovní záznam."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No Performances"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Add your first sports record."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Žiadne výkony"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridaj svoj prvý športový záznam."
           }
         }
       }
     },
-    "filter.all" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Vše"
+    "empty.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Žádné výkony"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "All"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "No Performances"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žiadne výkony"
           }
         }
       }
     },
-    "filter.remote" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Vzdálené"
+    "filter.all": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Vše"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Remote"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "All"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remote"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
           }
         }
       }
     },
-    "form.details" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Detail výkonu"
+    "filter.remote": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Vzdálené"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Performance Details"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Remote"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detail výkonu"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remote"
           }
         }
       }
     },
-    "form.duration" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Trvání"
+    "form.details": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Detail výkonu"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Duration"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Performance Details"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trvanie"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detail výkonu"
           }
         }
       }
     },
-    "form.durationMinutes" : {
-      "localizations" : {
-        "cs" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minuty"
+    "form.duration": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Trvání"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Duration"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trvanie"
+          }
+        }
+      }
+    },
+    "form.durationMinutes": {
+      "localizations": {
+        "cs": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minuty"
                 }
               },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minuty"
+              "many": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minuty"
                 }
               },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minuta"
+              "one": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minuta"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minut"
+              "other": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minut"
                 }
               },
-              "zero" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minut"
+              "zero": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minut"
                 }
               }
             }
           }
         },
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minute"
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minute"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minutes"
+              "other": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minutes"
                 }
               },
-              "zero" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minutes"
+              "zero": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minutes"
                 }
               }
             }
           }
         },
-        "sk" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minúty"
+        "sk": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minúty"
                 }
               },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minúty"
+              "many": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minúty"
                 }
               },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minúta"
+              "one": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minúta"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d minút"
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%d minút"
                 }
               },
-              "zero" : {
-                "stringUnit" : {
-                  "state" : "machine_translated",
-                  "value" : "%d minút"
+              "zero": {
+                "stringUnit": {
+                  "state": "machine_translated",
+                  "value": "%d minút"
                 }
               }
             }
@@ -500,479 +522,469 @@
         }
       }
     },
-    "form.firebaseDescription" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Záznam se odešle do Firebase Firestore."
+    "form.firebaseDescription": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Záznam se odešle do Firebase Firestore."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "The record will be sent to Firebase Firestore."
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "The record will be sent to Firebase Firestore."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Záznam sa odošle do Firebase Firestore."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Záznam sa odošle do Firebase Firestore."
           }
         }
       }
     },
-    "form.localDescription" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Záznam zůstane pouze v tomto zařízení."
+    "form.localDescription": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Záznam zůstane pouze v tomto zařízení."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "The record will stay only on this device."
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "The record will stay only on this device."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Záznam zostane iba v tomto zariadení."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Záznam zostane iba v tomto zariadení."
           }
         }
       }
     },
-    "form.location" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Místo konání"
+    "form.location": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Místo konání"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Location"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Location"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Miesto konania"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miesto konania"
           }
         }
       }
     },
-    "form.name" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Název výkonu"
+    "form.name": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Název výkonu"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Performance Name"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Performance Name"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Názov výkonu"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Názov výkonu"
           }
         }
       }
     },
-    "form.save" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Uložit výkon"
+    "form.save": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Uložit výkon"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Save Performance"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Save Performance"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uložiť výkon"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uložiť výkon"
           }
         }
       }
     },
-    "form.saveTo" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Uložit do"
+    "form.saveTo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Uložit do"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Save to"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Save to"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uložiť do"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uložiť do"
           }
         }
       }
     },
-    "form.storage" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Úložiště"
+    "form.storage": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Úložiště"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Storage"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Storage"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Úložisko"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Úložisko"
           }
         }
       }
     },
-    "list.filterAccessibilityLabel" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Filtr výkonů"
+    "list.filterAccessibilityLabel": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Filtr výkonů"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Performance Filter"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Performance Filter"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filter výkonov"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter výkonov"
           }
         }
       }
     },
-    "list.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Moje výkony"
+    "list.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Moje výkony"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "My Performances"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "My Performances"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moje výkony"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moje výkony"
           }
         }
       }
     },
-    "performance.delete.failed.message" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Zkus to prosím znovu."
+    "performance.delete.failed.message": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Zkus to prosím znovu."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please try again."
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Please try again."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skúste to znova."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skúste to znova."
           }
         }
       }
     },
-    "performance.delete.failed.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Záznam se nepodařilo smazat"
+    "performance.delete.failed.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Záznam se nepodařilo smazat"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could Not Delete Record"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could Not Delete Record"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Záznam sa nepodarilo vymazať"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Záznam sa nepodarilo vymazať"
           }
         }
       }
     },
-    "performance.delete.message" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Tuto akci nelze vrátit zpět."
+    "performance.delete.message": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Tuto akci nelze vrátit zpět."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This action cannot be undone."
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This action cannot be undone."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Túto akciu nemožno vrátiť späť."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Túto akciu nemožno vrátiť späť."
           }
         }
       }
     },
-    "performance.delete.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Smazat záznam?"
+    "performance.delete.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Smazat záznam?"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Record?"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Record?"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vymazať záznam?"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať záznam?"
           }
         }
       }
     },
-    "performance.detail" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%@ · %@"
+    "performance.detail": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "%@ · %@"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%@ · %@"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "%@ · %@"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ · %@"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
           }
         }
       }
     },
-    "performance.edit.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Upravit výkon"
+    "performance.edit.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Upravit výkon"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Performance"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit Performance"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Upraviť výkon"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upraviť výkon"
           }
         }
       }
     },
-    "performance.load.failed.message" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Zkus to prosím znovu."
+    "performance.load.failed.message": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Zkus to prosím znovu."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please try again."
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Please try again."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skúste to znova."
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skúste to znova."
           }
         }
       }
     },
-    "performance.load.failed.title" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Výkony se nepodařilo načíst"
+    "performance.load.failed.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Výkony se nepodařilo načíst"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could Not Load Performances"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could Not Load Performances"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Výkony sa nepodarilo načítať"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Výkony sa nepodarilo načítať"
           }
         }
       }
     },
-    "storage.firebase" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Firebase"
+    "storage.firebase": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Firebase"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Firebase"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Firebase"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firebase"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Firebase"
           }
         }
       }
     },
-    "storage.local" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Místní"
+    "storage.local": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Místní"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Local"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Local"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Local"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local"
           }
         }
       }
     },
-    "tab.addPerformance" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Nový výkon"
+    "tab.addPerformance": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Nový výkon"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "New Performance"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "New Performance"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nový výkon"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nový výkon"
           }
         }
       }
     },
-    "tab.performances" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Výkony"
+    "tab.performances": {
+      "extractionState": "stale",
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Výkony"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Performances"
+        "en": {
+          "stringUnit": {
+            "state": "machine_translated",
+            "value": "Performances"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Výkony"
-          }
-        }
-      }
-    },
-    "Zavrieť" : {
-      "localizations" : {
-        "cs" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Zavřít"
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Výkony"
           }
         }
       }
     }
   },
-  "version" : "1.3"
+  "version": "1.3"
 }

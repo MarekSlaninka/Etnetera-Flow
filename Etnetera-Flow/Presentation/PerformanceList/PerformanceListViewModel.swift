@@ -13,11 +13,11 @@ final class PerformanceListViewModel {
     private var allPerformances: [SportPerformance] = [] {
         didSet { applyFilter() }
     }
-    private let repository: SportPerformanceRepository
+    private let deleteUseCase: DeleteSportPerformanceUseCase
     private let observer: PerformanceObserver
 
     init(repository: SportPerformanceRepository) {
-        self.repository = repository
+        deleteUseCase = DeleteSportPerformanceUseCase(repository: repository)
         observer = PerformanceObserver(repository: repository)
     }
 
@@ -37,7 +37,7 @@ final class PerformanceListViewModel {
     }
 
     func delete(_ performance: SportPerformance) async throws {
-        try await repository.delete(performance)
+        try await deleteUseCase.execute(performance)
     }
 
     func dismissError() {
