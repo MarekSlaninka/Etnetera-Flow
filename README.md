@@ -9,6 +9,8 @@ An iOS app for recording sport performances, where every entry is stored either 
 - Live list that merges local and remote entries and updates as either source changes
 - Filter the list by all / local / remote
 - Search by name or location, ignoring case and diacritics
+- Pick a place interactively when adding or editing, with autocomplete from MapKit
+- Map of every entry that has a place, with a detail sheet behind each pin
 
 ## Requirements
 
@@ -62,6 +64,16 @@ Because view models depend only on the protocol, `PreviewData.swift` can supply 
 Use cases (`SaveSportPerformanceUseCase`, `UpdateSportPerformanceUseCase`, `DeleteSportPerformanceUseCase`) name the write operations the app supports and are the only way the view models reach the repository. Input validation and trimming currently sit in the view models, so the use cases stay thin — they are a seam for rules that do not exist yet rather than a place where logic lives today.
 
 The domain entity carries no serialization: `SportPerformanceRecord` is the SwiftData model and `SportPerformanceDocument` the Firestore one, each mapping to and from `SportPerformance` at the edge of `Data`.
+
+## Places and the map
+
+A performance carries an optional `PerformanceCoordinate` alongside its free-text `location`. Optional matters in both directions: entries saved before the map existed have no coordinate, and an entry can legitimately name a place without pinning it. There is no `0, 0` sentinel — null island is a real coordinate in the Gulf of Guinea, so absence is modelled as `nil`.
+
+`PerformanceCoordinate` has exactly one initialiser, and it validates. An earlier version also offered a convenience initialiser taking a pair of optionals, which turned out to be a trap: with two overloads, Swift picked the non-validating one whenever the arguments were non-optional, so out-of-range values passed straight through. The optional pair is now a `make` factory that funnels into the same failable initialiser, leaving one path in and no way to construct an invalid coordinate.
+
+`PlaceSearchService` wraps `MKLocalSearchCompleter` in two phases: completions stream in cheaply while typing, debounced by 300ms through a cancellable task, and the full `MKLocalSearch` runs only once a suggestion is chosen and real coordinates are needed. Tapping the map afterwards nudges the pin — `MapReader` converts the tap point into a coordinate, so the pin lands where the finger did rather than at some fixed location.
+
+The app asks for no location permission at all. Nothing here needs the device's own position: places are found by search, and the map frames the saved entries. That removes a permission prompt, an Info.plist key and a denied-access path from the app entirely. Centring on the user would be the one reason to add CoreLocation later.
 
 ## Tests
 

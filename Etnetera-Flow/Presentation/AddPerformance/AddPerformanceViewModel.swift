@@ -6,6 +6,7 @@ import Observation
 final class AddPerformanceViewModel {
     var name = ""
     var location = ""
+    var coordinate: PerformanceCoordinate?
     var duration = 30
     var storage: StorageType = .local
     private(set) var errorMessage: String?
@@ -27,6 +28,7 @@ final class AddPerformanceViewModel {
             id: UUID(),
             name: name.trimmingCharacters(in: .whitespacesAndNewlines),
             location: location.trimmingCharacters(in: .whitespacesAndNewlines),
+            coordinate: coordinate,
             duration: TimeInterval(duration * 60),
             storage: storage,
             createdAt: .now

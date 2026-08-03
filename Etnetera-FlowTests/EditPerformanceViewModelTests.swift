@@ -66,6 +66,41 @@ struct EditPerformanceViewModelTests {
     }
 
     @Test
+    func prefillsTheCoordinateFromTheStoredPerformance() {
+        let coordinate = PerformanceCoordinate(latitude: 48.7164, longitude: 21.2611)
+        let viewModel = makeViewModel(for: .stub(coordinate: coordinate))
+
+        #expect(viewModel.coordinate == coordinate)
+    }
+
+    @Test
+    func saveCarriesAChangedCoordinate() async throws {
+        let viewModel = makeViewModel(
+            for: .stub(coordinate: PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077))
+        )
+        let moved = PerformanceCoordinate(latitude: 48.7164, longitude: 21.2611)
+        viewModel.coordinate = moved
+
+        _ = await viewModel.save()
+        let updated = try #require(repository.updatedPerformances.first)
+
+        #expect(updated.coordinate == moved)
+    }
+
+    @Test
+    func clearingTheCoordinateIsPersisted() async throws {
+        let viewModel = makeViewModel(
+            for: .stub(coordinate: PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077))
+        )
+        viewModel.coordinate = nil
+
+        _ = await viewModel.save()
+        let updated = try #require(repository.updatedPerformances.first)
+
+        #expect(updated.coordinate == nil)
+    }
+
+    @Test
     func savingABlankNameIsRejected() async {
         let viewModel = makeViewModel(for: .stub())
         viewModel.name = "   "

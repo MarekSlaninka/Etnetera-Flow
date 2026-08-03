@@ -246,6 +246,28 @@
         }
       }
     },
+    "detail.createdAt": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenáno"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recorded"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenané"
+          }
+        }
+      }
+    },
     "duration.hoursAndMinutes": {
       "localizations": {
         "cs": {
@@ -716,6 +738,94 @@
           "stringUnit": {
             "state": "translated",
             "value": "Moje výkony"
+          }
+        }
+      }
+    },
+    "location.hint": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyhledej místo, nebo ho po výběru upřesni ťuknutím na mapu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search for a place, then tap the map to fine-tune the pin."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyhľadaj miesto, alebo ho po výbere upresni ťuknutím na mapu."
+          }
+        }
+      }
+    },
+    "map.empty.description": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Při přidávání výkonu vyhledej místo, aby se zobrazil na mapě."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search for a place when adding a performance to see it here."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pri pridávaní výkonu vyhľadaj miesto, aby sa zobrazil na mape."
+          }
+        }
+      }
+    },
+    "map.empty.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žádné výkony na mapě"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing on the map yet"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žiadne výkony na mape"
+          }
+        }
+      }
+    },
+    "map.title": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mapa"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Map"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mapa"
           }
         }
       }

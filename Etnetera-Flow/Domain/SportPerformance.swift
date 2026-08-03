@@ -4,6 +4,7 @@ struct SportPerformance: Identifiable, Equatable, Sendable {
     let id: UUID
     let name: String
     let location: String
+    let coordinate: PerformanceCoordinate?
     let duration: TimeInterval
     let storage: StorageType
     let createdAt: Date

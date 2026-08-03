@@ -30,10 +30,10 @@ struct EditPerformanceView: View {
                     }
                     .textInputAutocapitalization(.sentences)
 
-                    TextField(text: $viewModel.location, prompt: Text("form.location")) {
-                        Text("form.location")
-                    }
-                    .textInputAutocapitalization(.words)
+                    LocationField(
+                        location: $viewModel.location,
+                        coordinate: $viewModel.coordinate
+                    )
                 } header: { Text("form.details") }
 
                 Section {

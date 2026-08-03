@@ -6,6 +6,7 @@ enum PreviewData {
         id: UUID(),
         name: "Ranný beh",
         location: "Bratislava",
+        coordinate: PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077),
         duration: 2_700,
         storage: .local,
         createdAt: .now.addingTimeInterval(-86_400)
@@ -15,6 +16,7 @@ enum PreviewData {
         id: UUID(),
         name: "Večerné plávanie",
         location: "Pasienky",
+        coordinate: PerformanceCoordinate(latitude: 48.1618, longitude: 17.1400),
         duration: 3_600,
         storage: .remote,
         createdAt: .now.addingTimeInterval(-7_200)

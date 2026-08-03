@@ -6,6 +6,7 @@ extension SportPerformance {
         id: UUID = UUID(),
         name: String = "Morning run",
         location: String = "Bratislava",
+        coordinate: PerformanceCoordinate? = nil,
         duration: TimeInterval = 1_800,
         storage: StorageType = .local,
         createdAt: Date = Date(timeIntervalSince1970: 1_000_000)
@@ -14,6 +15,7 @@ extension SportPerformance {
             id: id,
             name: name,
             location: location,
+            coordinate: coordinate,
             duration: duration,
             storage: storage,
             createdAt: createdAt

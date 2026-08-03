@@ -6,6 +6,8 @@ final class SportPerformanceRecord {
     @Attribute(.unique) var identifier: UUID
     var name: String
     var location: String
+    var latitude: Double?
+    var longitude: Double?
     var duration: TimeInterval
     var createdAt: Date
 
@@ -13,6 +15,8 @@ final class SportPerformanceRecord {
         identifier = performance.id
         name = performance.name
         location = performance.location
+        latitude = performance.coordinate?.latitude
+        longitude = performance.coordinate?.longitude
         duration = performance.duration
         createdAt = performance.createdAt
     }
@@ -20,6 +24,8 @@ final class SportPerformanceRecord {
     func update(from performance: SportPerformance) {
         name = performance.name
         location = performance.location
+        latitude = performance.coordinate?.latitude
+        longitude = performance.coordinate?.longitude
         duration = performance.duration
     }
 
@@ -28,6 +34,7 @@ final class SportPerformanceRecord {
             id: identifier,
             name: name,
             location: location,
+            coordinate: PerformanceCoordinate.make(latitude: latitude, longitude: longitude),
             duration: duration,
             storage: .local,
             createdAt: createdAt

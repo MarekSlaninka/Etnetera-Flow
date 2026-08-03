@@ -6,6 +6,7 @@ import Observation
 final class EditPerformanceViewModel {
     var name: String
     var location: String
+    var coordinate: PerformanceCoordinate?
     var duration: Int
     private(set) var errorMessage: String?
 
@@ -23,6 +24,7 @@ final class EditPerformanceViewModel {
         self.updateUseCase = updateUseCase
         name = performance.name
         location = performance.location
+        coordinate = performance.coordinate
         duration = Self.editableMinutes(from: performance.duration)
     }
 
@@ -39,6 +41,7 @@ final class EditPerformanceViewModel {
             id: originalPerformance.id,
             name: name.trimmingCharacters(in: .whitespacesAndNewlines),
             location: location.trimmingCharacters(in: .whitespacesAndNewlines),
+            coordinate: coordinate,
             duration: TimeInterval(duration * 60),
             storage: originalPerformance.storage,
             createdAt: originalPerformance.createdAt

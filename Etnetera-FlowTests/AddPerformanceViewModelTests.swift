@@ -90,6 +90,28 @@ struct AddPerformanceViewModelTests {
     }
 
     @Test
+    func saveCarriesTheSelectedCoordinate() async throws {
+        fillValidForm()
+        viewModel.coordinate = PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077)
+
+        _ = await viewModel.save()
+        let saved = try #require(repository.savedPerformances.first)
+
+        #expect(saved.coordinate?.latitude == 48.1486)
+        #expect(saved.coordinate?.longitude == 17.1077)
+    }
+
+    @Test
+    func savingWithoutAPlaceLeavesTheCoordinateEmpty() async throws {
+        fillValidForm()
+
+        _ = await viewModel.save()
+        let saved = try #require(repository.savedPerformances.first)
+
+        #expect(saved.coordinate == nil)
+    }
+
+    @Test
     func saveFailureReportsAnErrorAndDoesNotDismiss() async {
         fillValidForm()
         repository.writeError = StubSportPerformanceRepository.Failure.write

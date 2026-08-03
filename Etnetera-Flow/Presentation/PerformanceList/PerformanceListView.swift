@@ -6,6 +6,7 @@ struct PerformanceListView: View {
     let onEditPerformance: (SportPerformance) -> Void
     @State private var performancePendingDeletion: SportPerformance?
     @State private var deletionError: Error?
+    @State private var isPresentingMap = false
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -60,6 +61,15 @@ struct PerformanceListView: View {
                     .accessibilityLabel(Text("list.filterAccessibilityLabel"))
                 }
 
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        isPresentingMap = true
+                    } label: {
+                        Label("map.title", systemImage: "map")
+                    }
+                    .accessibilityLabel(Text("map.title"))
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: onAddPerformance) {
                         Label("form.save", systemImage: "plus")
@@ -73,6 +83,9 @@ struct PerformanceListView: View {
         }
         .onDisappear {
             viewModel.stopObserving()
+        }
+        .sheet(isPresented: $isPresentingMap) {
+            PerformanceMapView(performances: viewModel.performances)
         }
         .alert("performance.delete.title", isPresented: Binding(
             get: { performancePendingDeletion != nil },

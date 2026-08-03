@@ -119,6 +119,8 @@ private struct SportPerformanceDocument: Codable {
     let id: String
     let name: String
     let location: String
+    let latitude: Double?
+    let longitude: Double?
     let duration: TimeInterval
     let createdAt: Date
 
@@ -126,6 +128,8 @@ private struct SportPerformanceDocument: Codable {
         id = performance.id.uuidString
         name = performance.name
         location = performance.location
+        latitude = performance.coordinate?.latitude
+        longitude = performance.coordinate?.longitude
         duration = performance.duration
         createdAt = performance.createdAt
     }
@@ -139,6 +143,7 @@ private struct SportPerformanceDocument: Codable {
             id: identifier,
             name: name,
             location: location,
+            coordinate: PerformanceCoordinate.make(latitude: latitude, longitude: longitude),
             duration: duration,
             storage: .remote,
             createdAt: createdAt
