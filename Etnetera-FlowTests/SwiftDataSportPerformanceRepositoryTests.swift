@@ -124,15 +124,16 @@ struct SwiftDataSportPerformanceRepositoryTests {
     }
 
     @Test
-    func fetchesAtMostOnePageAndKeepsTheNewest() async throws {
+    func returnsEveryStoredPerformanceNewestFirst() async throws {
         let recorder = PerformanceRecorder()
+        let count = 250
 
         _ = try await repository.observePerformances(
             onUpdate: { recorder.record($0) },
             onError: { recorder.record($0) }
         )
 
-        for index in 0 ..< (PerformanceFeed.pageSize + 10) {
+        for index in 0 ..< count {
             try await repository.save(
                 .stub(
                     name: "Performance \(index)",
@@ -141,8 +142,9 @@ struct SwiftDataSportPerformanceRepositoryTests {
             )
         }
 
-        #expect(recorder.latest.count == PerformanceFeed.pageSize)
-        #expect(recorder.latest.first?.name == "Performance \(PerformanceFeed.pageSize + 9)")
+        #expect(recorder.latest.count == count)
+        #expect(recorder.latest.first?.name == "Performance \(count - 1)")
+        #expect(recorder.latest.last?.name == "Performance 0")
     }
 
     @Test

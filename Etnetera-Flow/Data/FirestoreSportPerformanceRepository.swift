@@ -36,7 +36,6 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
 
         let listener = collection(for: userIdentifier)
             .order(by: SportPerformanceDocument.createdAtField, descending: true)
-            .limit(to: PerformanceFeed.pageSize)
             .addSnapshotListener { snapshot, error in
                 MainActor.assumeIsolated {
                     if let error {

@@ -52,10 +52,9 @@ final class SwiftDataSportPerformanceRepository: SportPerformanceRepository {
     }
 
     private func loadPerformances() -> [SportPerformance] {
-        var descriptor = FetchDescriptor<SportPerformanceRecord>(
+        let descriptor = FetchDescriptor<SportPerformanceRecord>(
             sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
         )
-        descriptor.fetchLimit = PerformanceFeed.pageSize
 
         do {
             return try modelContext.fetch(descriptor).map(\.domainModel)

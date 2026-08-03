@@ -75,18 +75,17 @@ xcodebuild -project Etnetera-Flow.xcodeproj -scheme Etnetera-Flow -destination '
 
 ## Scaling
 
-The feed is capped at `PerformanceFeed.pageSize` (100) entries per source: `.limit(to:)` on the Firestore query, `fetchLimit` on the SwiftData descriptor. Snapshots are applied incrementally through `PerformanceSnapshotBuffer` using `snapshot.documentChanges`, so adding one document decodes one document rather than re-decoding the entire collection.
+Both sources load in full, and search and filtering run client-side over the loaded entries. For the volumes this app realistically holds that is the right trade-off: everything is searchable, and the merged feed is always complete.
 
-That covers the two costs that grow fastest — billed document reads on every cold start, and decoding work on the main actor for every change. What it does not do is page beyond the first 100, and the honest reason is that pagination conflicts with the rest of the design:
+Snapshots are still applied incrementally. `PerformanceSnapshotBuffer` consumes `snapshot.documentChanges` rather than re-reading `snapshot.documents`, so adding one entry decodes one document instead of the whole collection — which matters because that work runs on the main actor.
 
-- **Search would silently narrow.** Filtering runs client-side over what is loaded. Paging in 100 at a time means a query only ever searches the loaded pages, and a matching entry from last year simply would not appear. Firestore has no substring operator either — only prefix ranges — so real full-text search needs a normalized search field or an external index.
-- **Merging two paginated sources needs a cursor on each.** Interleaving by `createdAt` across a local and a remote page means tracking both cursors and always drawing from whichever side holds the newer record.
+If the app were used more heavily, the part that has to change is **search**, not the loading. Loading everything to filter it in memory stops being viable well before the UI does, and Firestore bills per document read on every cold start. Search would have to move into both stores and the results be merged:
 
-Given that, a partial implementation that quietly breaks search seemed worse than a documented limit. The next steps I would take, in order:
+- **SwiftData** can filter server-side through a `#Predicate` on the `FetchDescriptor`, so the query returns matches instead of everything.
+- **Firestore** has no substring operator — only prefix ranges — so matching mid-word needs a normalized, tokenized search field written alongside each document, or an external index such as Algolia or Typesense.
+- **Merging** the two result sets then needs a cursor on each side, drawing from whichever holds the newer record, so that paging by `createdAt` stays correct across sources.
 
-1. Move `SportPerformanceRepository` off `@MainActor` so decoding and mapping leave the main thread, hopping back only to publish results.
-2. Replace the manual `publishChanges()` in the SwiftData repository with incremental change notifications, so a write stops re-fetching the page.
-3. Add cursor-based paging on both sources, together with a server-side search field, so the two land as one change rather than one breaking the other.
+Two smaller changes belong with that work: moving `SportPerformanceRepository` off `@MainActor` so decoding leaves the main thread, and replacing the manual `publishChanges()` in the SwiftData repository with incremental change notifications so a write stops re-fetching everything.
 
 ## Firestore
 
