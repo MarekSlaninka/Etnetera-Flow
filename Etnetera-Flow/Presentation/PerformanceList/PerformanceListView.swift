@@ -13,11 +13,15 @@ struct PerformanceListView: View {
         NavigationStack {
             Group {
                 if viewModel.performances.isEmpty {
-                    ContentUnavailableView(
-                        "empty.title",
-                        systemImage: "figure.run",
-                        description: Text("empty.description")
-                    )
+                    if viewModel.isSearching {
+                        ContentUnavailableView.search(text: viewModel.searchText)
+                    } else {
+                        ContentUnavailableView(
+                            "empty.title",
+                            systemImage: "figure.run",
+                            description: Text("empty.description")
+                        )
+                    }
                 } else {
                     List(viewModel.performances) { performance in
                         PerformanceRow(performance: performance)
@@ -41,6 +45,10 @@ struct PerformanceListView: View {
                 }
             }
             .navigationTitle(Text("list.title"))
+            .searchable(
+                text: $viewModel.searchText,
+                prompt: Text("search.prompt")
+            )
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Picker(selection: $viewModel.filter) {

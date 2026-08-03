@@ -35,10 +35,6 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
         let listener = collection(for: userIdentifier)
             .order(by: SportPerformanceDocument.createdAtField, descending: true)
             .addSnapshotListener { snapshot, error in
-                // Firestore dispatches callbacks on the main queue unless
-                // `FirestoreSettings.dispatchQueue` says otherwise. Asserting that
-                // here keeps snapshots in order — hopping through `Task { @MainActor }`
-                // would let two rapid snapshots be applied out of sequence.
                 MainActor.assumeIsolated {
                     if let error {
                         Self.logger.error("Listening for performances failed: \(error.localizedDescription, privacy: .public)")
@@ -78,9 +74,6 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
         let userIdentifier = try await userIdentifierProvider.identifier()
 
         do {
-            // `setData(from:)` is synchronous and returns as soon as the write is
-            // queued locally, so encoding by hand is what lets the caller await
-            // the acknowledged write and see a real failure.
             let document = try Firestore.Encoder().encode(SportPerformanceDocument(performance))
 
             try await collection(for: userIdentifier)
@@ -92,10 +85,6 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
         }
     }
 
-    /// Decodes a snapshot, skipping individual malformed documents.
-    ///
-    /// Mapping with a throwing transform would drop the whole feed because of a
-    /// single bad document, so unreadable ones are logged and left out instead.
     private static func performances(from snapshot: QuerySnapshot?) -> [SportPerformance] {
         guard let snapshot else { return [] }
 
@@ -110,11 +99,6 @@ final class FirestoreSportPerformanceRepository: SportPerformanceRepository {
     }
 }
 
-/// Firestore's wire representation of a sport performance.
-///
-/// The domain entity deliberately stays free of serialization concerns, and
-/// `storage` is not persisted at all — a document living in this collection is
-/// remote by definition.
 private struct SportPerformanceDocument: Codable {
     static let createdAtField = "createdAt"
 
@@ -171,10 +155,6 @@ private final class FirestorePerformanceObservation: PerformanceObservation {
         listener.remove()
     }
 
-    /// `remove()` is idempotent and thread-safe, and `listener` is immutable, so
-    /// this is safe to run from a nonisolated `deinit`. Holding the registration
-    /// in a `var` and nilling it out here would instead touch main-actor state
-    /// from whatever thread happens to release the object.
     deinit {
         listener.remove()
     }

@@ -38,7 +38,7 @@ struct AddPerformanceView: View {
                 Section {
                     Picker(selection: $viewModel.storage) {
                         ForEach(StorageType.allCases) { storage in
-                            Label { Text(storage.title) } icon: { Image(systemName: storage.icon) }.tag(storage)
+                            Text(storage.title).tag(storage)
                         }
                     } label: { Text("form.saveTo") }
                     .pickerStyle(.segmented)

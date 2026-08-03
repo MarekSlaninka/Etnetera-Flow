@@ -896,6 +896,28 @@
         }
       }
     },
+    "search.prompt": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hledat podle názvu nebo místa"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search by name or location"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hľadať podľa názvu alebo miesta"
+          }
+        }
+      }
+    },
     "storage.firebase": {
       "localizations": {
         "cs": {

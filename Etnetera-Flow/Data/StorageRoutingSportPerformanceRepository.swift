@@ -33,9 +33,6 @@ final class StorageRoutingSportPerformanceRepository: SportPerformanceRepository
                 observations: [localObservation, remoteObservation]
             )
         } catch {
-            // Attaching the remote listener needs an anonymous sign-in, which
-            // fails while offline. Report it, but keep the local observation
-            // alive rather than leaking it and leaving the list empty.
             onError(error)
             return CompositePerformanceObservation(observations: [localObservation])
         }

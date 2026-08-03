@@ -8,6 +8,7 @@ An iOS app for recording sport performances, where every entry is stored either 
 - Choose per entry whether it is saved locally or remotely
 - Live list that merges local and remote entries and updates as either source changes
 - Filter the list by all / local / remote
+- Search by name or location, ignoring case and diacritics
 
 ## Requirements
 
@@ -61,6 +62,16 @@ Because view models depend only on the protocol, `PreviewData.swift` can supply 
 Use cases (`SaveSportPerformanceUseCase`, `UpdateSportPerformanceUseCase`, `DeleteSportPerformanceUseCase`) name the write operations the app supports and are the only way the view models reach the repository. Input validation and trimming currently sit in the view models, so the use cases stay thin — they are a seam for rules that do not exist yet rather than a place where logic lives today.
 
 The domain entity carries no serialization: `SportPerformanceRecord` is the SwiftData model and `SportPerformanceDocument` the Firestore one, each mapping to and from `SportPerformance` at the edge of `Data`.
+
+## Tests
+
+```bash
+xcodebuild -project Etnetera-Flow.xcodeproj -scheme Etnetera-Flow -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
+```
+
+58 tests in 8 suites, written with Swift Testing. They cover the parts worth protecting: storage routing and the merged feed, ordering across both sources, search, filtering, SwiftData persistence against an in-memory container, and the form view models.
+
+`StubSportPerformanceRepository` stands in for both backing stores, so nothing in the suite touches Firebase or the disk — the tests run without network access or a Firebase project.
 
 ## Firestore
 

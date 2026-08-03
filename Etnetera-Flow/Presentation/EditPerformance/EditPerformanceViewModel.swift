@@ -26,11 +26,6 @@ final class EditPerformanceViewModel {
         duration = Self.editableMinutes(from: performance.duration)
     }
 
-    /// Snaps a stored duration onto the stepper's 5-minute grid.
-    ///
-    /// Truncating with `Int(duration / 60)` let a value land outside the
-    /// stepper's `5...720` range — a 90-second entry became `1`, which the
-    /// control could not represent and `isSaveEnabled` then rejected.
     private static func editableMinutes(from duration: TimeInterval) -> Int {
         let minutes = (duration / 60).rounded()
         let snapped = Int((minutes / 5).rounded()) * 5

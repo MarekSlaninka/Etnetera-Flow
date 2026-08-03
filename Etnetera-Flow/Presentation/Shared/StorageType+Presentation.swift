@@ -14,13 +14,6 @@ extension StorageType {
         case .remote: .blue
         }
     }
-
-    var icon: String {
-        switch self {
-        case .local: "internaldrive"
-        case .remote: "cloud"
-        }
-    }
 }
 
 extension PerformanceFilter {
