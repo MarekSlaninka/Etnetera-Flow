@@ -195,22 +195,50 @@ The workflows themselves are in the repository: [AGENTS.md](AGENTS.md) holds the
 [AI_ENGINEERING_PLAYBOOK.md](AI_ENGINEERING_PLAYBOOK.md). Global, machine-level skills configured
 outside this repository were used as well; they carry no project context and are not vendored here.
 
-### Requirements that shaped the result
+### What the assignment asked for
 
 - The app is native SwiftUI, without storyboards/XIBs, and records sport performances in either
-  SwiftData or Firestore.
+  SwiftData or Firestore, chosen per entry.
+- The entry screen captures a name, a location and a duration, and writes to the selected store.
 - The list supports Local/Remote/All filters; source information is communicated by colour as
   required, rather than duplicate icon and text. The coloured dot has an accessibility label for
   VoiceOver.
-- Creation uses a navigation-bar `+` button and a sheet, not a `TabView`; the sheet closes after a
-  successful save. Both create and edit sheets have an explicit close button.
-- Performances can be edited and deleted. Deletion is a red/destructive action and needs
-  confirmation. Read, write, delete and decoding errors are shown in the UI and logged with `OSLog`
-  in both repositories. A failed read reports itself rather than returning an empty list, so an
-  empty screen always means "nothing recorded" and never a swallowed failure.
+- One architecture runs through the whole project, and both orientations are supported.
+
+### Why the navigation flow looks like this
+
+The assignment describes two screens, which leaves open whether they are peers. They are not. The
+list answers "what have I recorded?", which is the question a user has almost every time they open
+the app; entering a performance is something they do occasionally, and it has a beginning and an end.
+That asymmetry is the whole argument:
+
+- **The list is the home screen.** It is what the app is for, so it is what you land on, with filters
+  and search applied directly to it rather than hidden behind a menu.
+- **Creating is a modal task, not a destination.** A `TabView` would present the two screens as equal
+  places to be, and would leave a half-filled form sitting in a tab while you browse the list. A
+  sheet raised from the navigation bar's `+` states that you have started a task, keeps the list
+  visible behind it, and returns you exactly where you were. It dismisses itself only after the save
+  succeeds, so a failure keeps your input on screen instead of discarding it.
+- **Editing reuses that same sheet pattern**, so the one modal idea covers both write paths.
+- **Deleting stays on the row** as a destructive swipe action with a confirmation, because it belongs
+  to the item rather than to a screen of its own.
+- **The map is reached from the list**, either as a whole via the toolbar or focused on one entry by
+  tapping its row, so it extends the list rather than competing with it.
+
+### Beyond the assignment
+
+- Editing and deleting performances, with deletion confirmed before it happens.
+- Search across name and location, ignoring case and diacritics.
+- Interactive place selection with MapKit autocomplete, and a map of every entry that has one.
+- A loading state while the merged feed is being prepared, and a feed that keeps showing local
+  entries when the remote source is unavailable.
+- Read, write, delete and decoding errors are shown in the UI and logged with `OSLog` in both
+  repositories. A failed read reports itself rather than returning an empty list, so an empty screen
+  always means "nothing recorded" and never a swallowed failure.
 - User-facing copy is in `Localizable.xcstrings` (Slovak, Czech and English). SwiftUI uses localisation
   keys/`LocalizedStringResource` directly; only formatted values are resolved to a concrete
   `String`.
+- 113 automated tests.
 
 ### Architectural evolution
 
