@@ -1,0 +1,4 @@
+interface:
+  display_name: "SwiftUI State & Composition"
+  short_description: "Build modern, accessible SwiftUI interfaces"
+  default_prompt: "Use $ios-swiftui-state to review this SwiftUI view."

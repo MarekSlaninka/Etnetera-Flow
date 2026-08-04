@@ -1,0 +1,4 @@
+interface:
+  display_name: "Swift Concurrency Safety"
+  short_description: "Design safe async code and cancellation lifecycles"
+  default_prompt: "Use $ios-concurrency-safety to review this async code."

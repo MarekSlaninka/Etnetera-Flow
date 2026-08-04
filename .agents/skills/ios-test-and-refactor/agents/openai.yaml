@@ -1,0 +1,4 @@
+interface:
+  display_name: "iOS Test & Refactor"
+  short_description: "Protect behavior with focused Swift Testing"
+  default_prompt: "Use $ios-test-and-refactor to safely refactor this Flow code."

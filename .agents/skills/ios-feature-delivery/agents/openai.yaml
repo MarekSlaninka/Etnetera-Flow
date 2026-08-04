@@ -1,0 +1,4 @@
+interface:
+  display_name: "iOS Feature Delivery"
+  short_description: "Ship focused, testable iOS vertical slices"
+  default_prompt: "Use $ios-feature-delivery to implement this Flow feature."
