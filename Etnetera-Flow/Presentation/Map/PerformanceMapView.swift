@@ -88,7 +88,7 @@ struct PerformanceMapView: View {
             )) { performance in
                 PerformancePinDetail(performance: performance)
                     .frame(maxHeight: .infinity, alignment: .top)
-                    .presentationDetents([.height(220)])
+                    .presentationDetents([.height(180)])
                     .presentationDragIndicator(.visible)
             }
         }
@@ -110,7 +110,7 @@ struct PerformanceMapView: View {
                 .padding(10)
                 .accessibilityLabel(Text("action.close"))
             }
-            .padding()
+            .padding(8)
             .transition(.move(edge: .trailing).combined(with: .opacity))
     }
 }
