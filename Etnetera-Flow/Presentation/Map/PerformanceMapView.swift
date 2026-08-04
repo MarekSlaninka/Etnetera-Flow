@@ -5,6 +5,7 @@ struct PerformanceMapView: View {
     let performances: [SportPerformance]
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     @State private var selectedIdentifier: UUID?
     @State private var cameraPosition: MapCameraPosition
 
@@ -28,6 +29,14 @@ struct PerformanceMapView: View {
 
     private var selected: SportPerformance? {
         mapped.first { $0.id == selectedIdentifier }?.performance
+    }
+
+    private var showsDetailBesideMap: Bool {
+        verticalSizeClass == .compact
+    }
+
+    private var presentedInSheet: SportPerformance? {
+        showsDetailBesideMap ? nil : selected
     }
 
     var body: some View {
@@ -55,6 +64,12 @@ struct PerformanceMapView: View {
                         MapCompass()
                         MapScaleView()
                     }
+                    .overlay(alignment: .topTrailing) {
+                        if showsDetailBesideMap, let selected {
+                            detailCard(for: selected)
+                        }
+                    }
+                    .animation(.snappy, value: selectedIdentifier)
                 }
             }
             .navigationTitle(Text("map.title"))
@@ -68,14 +83,35 @@ struct PerformanceMapView: View {
                 }
             }
             .sheet(item: Binding(
-                get: { selected },
+                get: { presentedInSheet },
                 set: { if $0 == nil { selectedIdentifier = nil } }
             )) { performance in
                 PerformancePinDetail(performance: performance)
+                    .frame(maxHeight: .infinity, alignment: .top)
                     .presentationDetents([.height(220)])
                     .presentationDragIndicator(.visible)
             }
         }
+    }
+
+    private func detailCard(for performance: SportPerformance) -> some View {
+        PerformancePinDetail(performance: performance)
+            .frame(maxWidth: 320)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+            .overlay(alignment: .topTrailing) {
+                Button {
+                    selectedIdentifier = nil
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .padding(10)
+                .accessibilityLabel(Text("action.close"))
+            }
+            .padding()
+            .transition(.move(edge: .trailing).combined(with: .opacity))
     }
 }
 

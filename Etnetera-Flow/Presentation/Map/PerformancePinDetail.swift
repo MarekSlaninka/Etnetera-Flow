@@ -33,8 +33,6 @@ struct PerformancePinDetail: View {
             } label: {
                 Label("detail.createdAt", systemImage: "calendar")
             }
-
-            Spacer(minLength: 0)
         }
         .font(.subheadline)
         .padding(20)
