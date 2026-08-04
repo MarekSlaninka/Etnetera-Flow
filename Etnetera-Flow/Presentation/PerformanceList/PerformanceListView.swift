@@ -70,26 +70,27 @@ struct PerformanceListView: View {
 
     private var performanceList: some View {
         List(viewModel.performances) { performance in
-            PerformanceRow(performance: performance)
-                .contentShape(.rect)
-                .onTapGesture {
-                    performanceToShowOnMap = performance
+            Button {
+                performanceToShowOnMap = performance
+            } label: {
+                PerformanceRow(performance: performance)
+            }
+            .buttonStyle(.plain)
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                Button {
+                    onEditPerformance(performance)
+                } label: {
+                    Label("action.edit", systemImage: "pencil")
                 }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button {
-                        onEditPerformance(performance)
-                    } label: {
-                        Label("action.edit", systemImage: "pencil")
-                    }
-                    .tint(.blue)
+                .tint(.blue)
 
-                    Button(role: .destructive) {
-                        performancePendingDeletion = performance
-                    } label: {
-                        Label("action.delete", systemImage: "trash")
-                    }
-                    .tint(.red)
+                Button(role: .destructive) {
+                    performancePendingDeletion = performance
+                } label: {
+                    Label("action.delete", systemImage: "trash")
                 }
+                .tint(.red)
+            }
         }
         .listStyle(.insetGrouped)
     }
