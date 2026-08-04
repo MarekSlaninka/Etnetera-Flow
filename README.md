@@ -56,9 +56,16 @@ set of documents.
 The project follows a Clean Architecture split, with dependencies pointing inwards towards `Domain`.
 
 ```
-Domain/        Model, repository contracts, and use cases.
-Data/          Local SwiftData, remote Firestore, and place-search implementations.
-Presentation/  SwiftUI views and their view models.
+Domain/
+  Model/            SportPerformance and PerformanceCoordinate.
+  Repositories/     The repository contract and the observation it hands back.
+  UseCases/         Save, update and delete.
+Data/
+  Local/            SwiftData repository and its stored model.
+  Remote/           Firestore repository, document, snapshot buffer, anonymous identity.
+  Places/           MapKit place search.
+  StorageRouting…   Composes both stores; sits above them rather than inside either.
+Presentation/       SwiftUI views and their view models, grouped by screen.
 ```
 
 The key seam is `SportPerformanceRepository`, defined in `Domain` and implemented three times:
@@ -126,10 +133,12 @@ xcodebuild -project Etnetera-Flow.xcodeproj -scheme Etnetera-Flow \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
 ```
 
-102 test definitions in 13 suites, written with Swift Testing. They cover the parts worth protecting:
+106 test definitions in 13 suites, written with Swift Testing. They cover the parts worth protecting:
 storage routing and the merged feed, ordering across both sources, search, filtering, SwiftData
-persistence against an in-memory container, and the form view models. Tests follow the
-Arrange–Act–Assert (AAA) structure to make their setup, action, and expected outcome clear.
+persistence against an in-memory container, coordinate mapping through both stores, the Firestore
+document, the incremental snapshot buffer, the map's camera and selection, and the form view models.
+Tests follow the Arrange–Act–Assert (AAA) structure to make their setup, action, and expected outcome
+clear.
 
 `StubSportPerformanceRepository` stands in for both backing stores, so nothing in the suite touches
 Firebase or the disk — the tests run without network access or a Firebase project.
@@ -192,8 +201,9 @@ decision-making explicit.
   successful save. Both create and edit sheets have an explicit close button.
 - Performances can be edited and deleted. Deletion is a red/destructive action and needs
   confirmation. Read, write, delete and decoding errors are shown in the UI and logged with `OSLog`
-  for debugging.
-- User-facing copy is in `Localizable.xcstrings` (Slovak and English). SwiftUI uses localisation
+  in both repositories. A failed read reports itself rather than returning an empty list, so an
+  empty screen always means "nothing recorded" and never a swallowed failure.
+- User-facing copy is in `Localizable.xcstrings` (Slovak, Czech and English). SwiftUI uses localisation
   keys/`LocalizedStringResource` directly; only formatted values are resolved to a concrete
   `String`.
 
