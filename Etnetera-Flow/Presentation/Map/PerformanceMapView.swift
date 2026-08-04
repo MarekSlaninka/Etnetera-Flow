@@ -3,11 +3,20 @@ import SwiftUI
 
 struct PerformanceMapView: View {
     let performances: [SportPerformance]
-    var focused: SportPerformance?
 
     @Environment(\.dismiss) private var dismiss
     @State private var selectedIdentifier: UUID?
-    @State private var cameraPosition: MapCameraPosition = .automatic
+    @State private var cameraPosition: MapCameraPosition
+
+    init(performances: [SportPerformance], focused: SportPerformance? = nil) {
+        self.performances = performances
+        _selectedIdentifier = State(
+            initialValue: PerformanceMapFocus.selection(focusing: focused)
+        )
+        _cameraPosition = State(
+            initialValue: PerformanceMapFocus.position(focusing: focused)
+        )
+    }
 
     private var mapped: [MappedPerformance] {
         performances.compactMap { performance in
@@ -45,9 +54,6 @@ struct PerformanceMapView: View {
                     .mapControls {
                         MapCompass()
                         MapScaleView()
-                    }
-                    .onAppear {
-                        cameraPosition = PerformanceMapFocus.position(focusing: focused)
                     }
                 }
             }

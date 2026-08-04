@@ -23,4 +23,10 @@ enum PerformanceMapFocus {
 
         return .region(region)
     }
+
+    static func selection(focusing performance: SportPerformance?) -> UUID? {
+        guard let performance, performance.coordinate != nil else { return nil }
+
+        return performance.id
+    }
 }

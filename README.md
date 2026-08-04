@@ -91,10 +91,15 @@ optional because naming a place without pinning it stays valid — a run "in the
 on a map. There is no `0, 0` sentinel: null island is a real coordinate in the Gulf of Guinea, so
 absence is modelled as `nil`.
 
-Tapping a row opens the map centred on that entry. `PerformanceMapFocus` decides the camera, which
-keeps that decision testable and out of the view: a performance with a coordinate yields a tight
-region around it, and one without falls back to the automatic camera framing every pin. Tapping an
-entry that has no place therefore still opens a useful map rather than dead-ending.
+Tapping a row opens the map centred on that entry with its pin already selected. `PerformanceMapFocus`
+owns both decisions — the camera and the initial selection — which keeps them testable and out of the
+view. A performance with a coordinate yields a tight region around it and selects its marker; one
+without falls back to the automatic camera framing every pin and selects nothing, so tapping an entry
+that has no place still opens a useful map rather than dead-ending.
+
+Both are seeded as initial `@State` in the view's initialiser rather than applied in `onAppear`. The
+map is itself presented as a sheet, and setting selection after the sheet has begun animating in races
+with that presentation; seeding it means the first render already shows the intended state.
 
 `PerformanceCoordinate` has exactly one initialiser, and it validates. An earlier version also
 offered a convenience initialiser taking a pair of optionals, which turned out to be a trap: with

@@ -84,6 +84,56 @@ struct PerformanceMapFocusTests {
     }
 
     @Test
+    func selectsTheFocusedPerformance() {
+        // Arrange
+        let performance = SportPerformance.stub(coordinate: bratislava)
+
+        // Act
+        let selection = PerformanceMapFocus.selection(focusing: performance)
+
+        // Assert
+        #expect(selection == performance.id)
+    }
+
+    @Test
+    func selectsNothingForAPerformanceWithoutAPlace() {
+        // Arrange
+        let performance = SportPerformance.stub(coordinate: nil)
+
+        // Act
+        let selection = PerformanceMapFocus.selection(focusing: performance)
+
+        // Assert
+        #expect(selection == nil)
+    }
+
+    @Test
+    func selectsNothingWhenNothingIsFocused() {
+        // Arrange
+        let performance: SportPerformance? = nil
+
+        // Act
+        let selection = PerformanceMapFocus.selection(focusing: performance)
+
+        // Assert
+        #expect(selection == nil)
+    }
+
+    @Test
+    func selectsExactlyThePerformanceThatDrivesTheCamera() throws {
+        // Arrange
+        let performance = SportPerformance.stub(coordinate: bratislava)
+
+        // Act
+        let selection = PerformanceMapFocus.selection(focusing: performance)
+        let region = try #require(PerformanceMapFocus.region(focusing: performance))
+
+        // Assert
+        #expect(selection == performance.id)
+        #expect(region.center.latitude == performance.coordinate?.latitude)
+    }
+
+    @Test
     func derivesTheRegionFromTheCoordinateItself() throws {
         // Arrange
         let coordinate = try #require(bratislava)
