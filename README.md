@@ -133,7 +133,7 @@ xcodebuild -project Etnetera-Flow.xcodeproj -scheme Etnetera-Flow \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
 ```
 
-106 test definitions in 13 suites, written with Swift Testing. They cover the parts worth protecting:
+113 test definitions in 14 suites, written with Swift Testing. They cover the parts worth protecting:
 storage routing and the merged feed, ordering across both sources, search, filtering, SwiftData
 persistence against an in-memory container, coordinate mapping through both stores, the Firestore
 document, the incremental snapshot buffer, the map's camera and selection, and the form view models.
