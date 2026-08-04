@@ -23,8 +23,17 @@ Use the project’s Observation-based approach and keep views declarative. A vie
 - Support Dynamic Type and do not use colour as the sole carrier of meaning.
 - Confirm destructive deletion and clearly expose loading, empty, and error states.
 
+## Traps this codebase has already hit
+
+- **A frame that fills the width does not widen the tap target.** A stack is hit-tested only where its subviews actually are, so a row laid out with `frame(maxWidth: .infinity)` still ignores taps beside its text. Add `contentShape(.rect)`. This was fixed twice: in the performance list rows and in the place-suggestion rows.
+- **Prefer a `Button` over `onTapGesture` for a row that acts like a control.** The button reports itself to VoiceOver and gives press feedback; the gesture does neither.
+- **Seed `@State` in the initialiser when the first render must already be correct.** Assigning in `onAppear` races with an in-flight sheet presentation, which left the map's focused pin unselected.
+- **Presentation detents are ignored at compact height.** A sheet covers a landscape iPhone whatever height you ask for, so branch on `verticalSizeClass` and present the content beside the map instead.
+- **A segmented picker renders only the label's text.** An icon passed to `Label` there is invisible, so it is dead code rather than decoration.
+
 ## Done criteria
 
 - State ownership is explicit and fits the view lifecycle.
 - The screen is accessible, localised, and composable.
+- Interactive rows respond across their whole area, not only where their text sits.
 - The change does not add redundant rendering work.

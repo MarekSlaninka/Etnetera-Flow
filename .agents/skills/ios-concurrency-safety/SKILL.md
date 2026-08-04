@@ -22,8 +22,17 @@ Make ownership and isolation explicit before changing code. Prefer a correct mod
 - Do not mark an entire subsystem `@MainActor` solely to remove a race warning.
 - Preserve the explicit observation lifecycle between `PerformanceObserver` and repository implementations.
 
+## Traps this codebase has already hit
+
+- **Deduplicate in-flight async work behind an actor.** Concurrent callers each started their own anonymous sign-in, which created several users and let a write land under a different uid than the listener was watching. `UserIdentifierProvider` now shares one task.
+- **Release a readiness gate on the failure path too.** The merged feed waits for both sources before publishing; when the remote observation could not start, forgetting to release that gate left the spinner turning forever with local data already in hand.
+- **A failed read must not return an empty result.** Swallowing a fetch error into `[]` made "loading failed" indistinguishable from "nothing recorded". Log it and report it, and emit an empty feed only where a downstream gate would otherwise stall.
+- **Cancel what you already attached when a later step throws.** The routing repository leaked its local observation when the remote one failed, because the throw skipped the cleanup.
+- **Overload resolution can bypass validation.** Two initialisers — one validating, one not — let Swift silently pick the unchecked one for non-optional arguments. Keep a single failable path and funnel convenience entry points into it.
+
 ## Done criteria
 
 - Every mutable value has a justified isolation boundary.
 - Long-running work and listener registrations have an explicit owner and cancellation path.
+- Failure paths release the same gates and resources the success path does.
 - The result does not conceal races behind unsafe annotations.
