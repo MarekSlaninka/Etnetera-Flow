@@ -190,6 +190,11 @@ iteration, but treated its proposals as reviewable drafts: I supplied the produc
 challenged initial choices and requested the revisions below. This section is included to make that
 decision-making explicit.
 
+The workflows themselves are in the repository: [AGENTS.md](AGENTS.md) holds the baseline rules and
+`.agents/skills/` the task-specific ones, described in
+[AI_ENGINEERING_PLAYBOOK.md](AI_ENGINEERING_PLAYBOOK.md). Global, machine-level skills configured
+outside this repository were used as well; they carry no project context and are not vendored here.
+
 ### Requirements that shaped the result
 
 - The app is native SwiftUI, without storyboards/XIBs, and records sport performances in either

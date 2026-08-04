@@ -24,7 +24,6 @@ xcuserdata/
 tmp/
 
 # Local agent tooling
-AGENTS.md
 .codex/
 
 # Firebase app config, supplied separately.

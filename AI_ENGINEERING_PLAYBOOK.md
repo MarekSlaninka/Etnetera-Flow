@@ -22,4 +22,6 @@ This repository includes a small, reusable set of AI workflows for delivering an
 
 The repository-level [AGENTS.md](AGENTS.md) defines baseline rules. A task then loads only its relevant skill, which keeps guidance precise without carrying unrelated process into the task.
 
+Alongside these, development also drew on global, machine-level skills configured outside this repository — general-purpose workflows for code review, refactoring and documentation that are not specific to any project. They are deliberately not vendored here: they carry no project context and would only add noise to a repository that should describe this app. The skills above are the ones that shaped decisions in this codebase.
+
 The goal is not code generation for its own sake. It is a repeatable engineering conversation: clarify the behavior, choose the smallest appropriate design, make the change, and verify the observable result.
