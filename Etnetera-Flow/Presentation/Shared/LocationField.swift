@@ -36,6 +36,7 @@ struct LocationField: View {
                         .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(.rect)
             }
             .buttonStyle(.plain)
         }
