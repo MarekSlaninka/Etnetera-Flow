@@ -88,16 +88,3 @@ struct LocationField: View {
         }
     }
 }
-
-extension PerformanceCoordinate {
-    var mapCoordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-
-    var region: MKCoordinateRegion {
-        MKCoordinateRegion(
-            center: mapCoordinate,
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        )
-    }
-}

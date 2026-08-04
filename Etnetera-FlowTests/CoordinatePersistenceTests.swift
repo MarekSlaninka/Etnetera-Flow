@@ -31,50 +31,66 @@ struct CoordinatePersistenceTests {
 
     @Test
     func roundTripsACoordinateThroughSwiftData() async throws {
+        // Arrange
         let recorder = try await observe()
 
+        // Act
         try await repository.save(.stub(coordinate: bratislava))
 
+        // Assert
         #expect(recorder.latest.first?.coordinate == bratislava)
     }
 
     @Test
     func keepsPerformancesWithoutACoordinate() async throws {
+        // Arrange
         let recorder = try await observe()
 
+        // Act
         try await repository.save(.stub(coordinate: nil))
 
+        // Assert
         #expect(recorder.latest.count == 1)
         #expect(recorder.latest.first?.coordinate == nil)
     }
 
     @Test
     func updatingReplacesTheCoordinate() async throws {
+        // Arrange
         let recorder = try await observe()
         let original = SportPerformance.stub(coordinate: bratislava)
-
         try await repository.save(original)
+
+        // Act
         try await repository.update(.stub(id: original.id, coordinate: kosice))
 
+        // Assert
         #expect(recorder.latest.first?.coordinate == kosice)
     }
 
     @Test
     func updatingCanRemoveTheCoordinate() async throws {
+        // Arrange
         let recorder = try await observe()
         let original = SportPerformance.stub(coordinate: bratislava)
-
         try await repository.save(original)
+
+        // Act
         try await repository.update(.stub(id: original.id, coordinate: nil))
 
+        // Assert
         #expect(recorder.latest.first?.coordinate == nil)
     }
 
     @Test
     func recordMapsBothDirections() {
+        // Arrange
         let performance = SportPerformance.stub(coordinate: bratislava)
+
+        // Act
         let record = SportPerformanceRecord(performance: performance)
 
+        // Assert
         #expect(record.latitude == bratislava?.latitude)
         #expect(record.longitude == bratislava?.longitude)
         #expect(record.domainModel.coordinate == bratislava)
@@ -82,9 +98,13 @@ struct CoordinatePersistenceTests {
 
     @Test
     func recordWithOnlyOneStoredValueYieldsNoCoordinate() {
+        // Arrange
         let record = SportPerformanceRecord(performance: .stub(coordinate: bratislava))
+
+        // Act
         record.longitude = nil
 
+        // Assert
         #expect(record.domainModel.coordinate == nil)
     }
 }

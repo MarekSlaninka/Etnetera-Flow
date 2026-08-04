@@ -26,13 +26,17 @@ final class StorageRoutingSportPerformanceRepository: SportPerformanceRepository
         do {
             let remoteObservation = try await remoteRepository.observePerformances(
                 onUpdate: { merger.updateRemote($0) },
-                onError: onError
+                onError: { error in
+                    merger.finishInitialRemoteLoad()
+                    onError(error)
+                }
             )
 
             return CompositePerformanceObservation(
                 observations: [localObservation, remoteObservation]
             )
         } catch {
+            merger.finishInitialRemoteLoad()
             onError(error)
             return CompositePerformanceObservation(observations: [localObservation])
         }
@@ -70,6 +74,7 @@ final class StorageRoutingSportPerformanceRepository: SportPerformanceRepository
 private final class PerformanceMerger {
     private var local: [SportPerformance] = []
     private var remote: [SportPerformance] = []
+    private var isAwaitingInitialRemoteUpdate = true
     private let onUpdate: ([SportPerformance]) -> Void
 
     init(onUpdate: @escaping ([SportPerformance]) -> Void) {
@@ -78,11 +83,22 @@ private final class PerformanceMerger {
 
     func updateLocal(_ performances: [SportPerformance]) {
         local = performances
-        onUpdate(local + remote)
+        publishIfReady()
     }
 
     func updateRemote(_ performances: [SportPerformance]) {
         remote = performances
+        finishInitialRemoteLoad()
+    }
+
+    func finishInitialRemoteLoad() {
+        isAwaitingInitialRemoteUpdate = false
+        publishIfReady()
+    }
+
+    private func publishIfReady() {
+        guard !isAwaitingInitialRemoteUpdate else { return }
+
         onUpdate(local + remote)
     }
 }

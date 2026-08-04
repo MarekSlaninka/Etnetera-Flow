@@ -177,75 +177,6 @@
         }
       }
     },
-    "alert.saved.confirm": {
-      "extractionState": "stale",
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Hotovo"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Done"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hotovo"
-          }
-        }
-      }
-    },
-    "alert.saved.message": {
-      "extractionState": "stale",
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Záznam najdeš v seznamu výkonů."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "The record is now in your performance list."
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Záznam nájdeš v zozname výkonov."
-          }
-        }
-      }
-    },
-    "alert.saved.title": {
-      "extractionState": "stale",
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Výkon uložen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Performance Saved"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Výkon uložený"
-          }
-        }
-      }
-    },
     "detail.createdAt": {
       "localizations": {
         "cs": {
@@ -1006,6 +937,28 @@
         }
       }
     },
+    "performance.loading": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Načítávání výkonů…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading performances…"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Načítavajú sa výkony…"
+          }
+        }
+      }
+    },
     "search.prompt": {
       "localizations": {
         "cs": {
@@ -1090,29 +1043,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nový výkon"
-          }
-        }
-      }
-    },
-    "tab.performances": {
-      "extractionState": "stale",
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Výkony"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "machine_translated",
-            "value": "Performances"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Výkony"
           }
         }
       }

@@ -16,17 +16,26 @@ struct PerformanceFilterTests {
         storage: StorageType,
         expected: Bool
     ) {
-        #expect(filter.includes(.stub(storage: storage)) == expected)
+        // Arrange
+        let performance = SportPerformance.stub(storage: storage)
+
+        // Act
+        let isIncluded = filter.includes(performance)
+
+        // Assert
+        #expect(isIncluded == expected)
     }
 
-    @Test
-    func coversEveryStorageTypeAcrossItsCases() {
-        for storage in StorageType.allCases {
-            let matching = PerformanceFilter.allCases.filter {
-                $0.includes(.stub(storage: storage))
-            }
+    @Test(arguments: StorageType.allCases)
+    func everyStorageTypeIsMatchedByExactlyTwoFilters(storage: StorageType) {
+        // Arrange
+        let performance = SportPerformance.stub(storage: storage)
 
-            #expect(matching.count == 2)
-        }
+        // Act
+        let matching = PerformanceFilter.allCases.filter { $0.includes(performance) }
+
+        // Assert
+        #expect(matching.count == 2)
+        #expect(matching.contains(.all))
     }
 }

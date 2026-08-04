@@ -3,6 +3,7 @@ import SwiftUI
 
 struct PerformanceMapView: View {
     let performances: [SportPerformance]
+    var focused: SportPerformance?
 
     @Environment(\.dismiss) private var dismiss
     @State private var selectedIdentifier: UUID?
@@ -44,6 +45,9 @@ struct PerformanceMapView: View {
                     .mapControls {
                         MapCompass()
                         MapScaleView()
+                    }
+                    .onAppear {
+                        cameraPosition = PerformanceMapFocus.position(focusing: focused)
                     }
                 }
             }

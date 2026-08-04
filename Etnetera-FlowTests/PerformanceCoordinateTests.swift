@@ -6,12 +6,18 @@ import Testing
 struct PerformanceCoordinateTests {
     @Test
     func buildsFromAPairOfValues() throws {
+        // Arrange
+        let latitude = 48.1486
+        let longitude = 17.1077
+
+        // Act
         let coordinate = try #require(
-            PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077)
+            PerformanceCoordinate(latitude: latitude, longitude: longitude)
         )
 
-        #expect(coordinate.latitude == 48.1486)
-        #expect(coordinate.longitude == 17.1077)
+        // Assert
+        #expect(coordinate.latitude == latitude)
+        #expect(coordinate.longitude == longitude)
     }
 
     @Test(arguments: [
@@ -20,12 +26,14 @@ struct PerformanceCoordinateTests {
         (Double?.none, Double?.none),
     ])
     func requiresBothValues(latitude: Double?, longitude: Double?) {
-        #expect(PerformanceCoordinate.make(latitude: latitude, longitude: longitude) == nil)
-    }
+        // Arrange
+        let pair = (latitude, longitude)
 
-    @Test
-    func makeValidatesTheRangeToo() {
-        #expect(PerformanceCoordinate.make(latitude: 91, longitude: 17) == nil)
+        // Act
+        let coordinate = PerformanceCoordinate.make(latitude: pair.0, longitude: pair.1)
+
+        // Assert
+        #expect(coordinate == nil)
     }
 
     @Test(arguments: [
@@ -35,17 +43,55 @@ struct PerformanceCoordinateTests {
         (48.0, -181.0),
     ])
     func rejectsValuesOutsideTheValidRange(latitude: Double, longitude: Double) {
-        #expect(PerformanceCoordinate(latitude: latitude, longitude: longitude) == nil)
+        // Arrange
+        let pair = (latitude, longitude)
+
+        // Act
+        let coordinate = PerformanceCoordinate(latitude: pair.0, longitude: pair.1)
+
+        // Assert
+        #expect(coordinate == nil)
+    }
+
+    @Test
+    func makeValidatesTheRangeToo() {
+        // Arrange
+        let outOfRange = 91.0
+
+        // Act
+        let coordinate = PerformanceCoordinate.make(latitude: outOfRange, longitude: 17)
+
+        // Assert
+        #expect(coordinate == nil)
     }
 
     @Test
     func acceptsNullIslandAsARealCoordinate() {
-        #expect(PerformanceCoordinate(latitude: 0, longitude: 0) != nil)
+        // Arrange
+        let nullIsland = (latitude: 0.0, longitude: 0.0)
+
+        // Act
+        let coordinate = PerformanceCoordinate(
+            latitude: nullIsland.latitude,
+            longitude: nullIsland.longitude
+        )
+
+        // Assert
+        #expect(coordinate != nil)
     }
 
-    @Test
-    func acceptsTheRangeBoundaries() {
-        #expect(PerformanceCoordinate(latitude: 90, longitude: 180) != nil)
-        #expect(PerformanceCoordinate(latitude: -90, longitude: -180) != nil)
+    @Test(arguments: [
+        (90.0, 180.0),
+        (-90.0, -180.0),
+    ])
+    func acceptsTheRangeBoundaries(latitude: Double, longitude: Double) {
+        // Arrange
+        let pair = (latitude, longitude)
+
+        // Act
+        let coordinate = PerformanceCoordinate(latitude: pair.0, longitude: pair.1)
+
+        // Assert
+        #expect(coordinate != nil)
     }
 }

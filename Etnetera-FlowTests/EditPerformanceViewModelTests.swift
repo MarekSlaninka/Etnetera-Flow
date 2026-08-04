@@ -5,6 +5,8 @@ import Testing
 @MainActor
 struct EditPerformanceViewModelTests {
     private let repository = StubSportPerformanceRepository()
+    private let bratislava = PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077)
+    private let kosice = PerformanceCoordinate(latitude: 48.7164, longitude: 21.2611)
 
     private func makeViewModel(
         for performance: SportPerformance
@@ -17,10 +19,17 @@ struct EditPerformanceViewModelTests {
 
     @Test
     func prefillsTheFormFromTheStoredPerformance() {
-        let viewModel = makeViewModel(
-            for: .stub(name: "Run", location: "Bratislava", duration: 2_700)
+        // Arrange
+        let performance = SportPerformance.stub(
+            name: "Run",
+            location: "Bratislava",
+            duration: 2_700
         )
 
+        // Act
+        let viewModel = makeViewModel(for: performance)
+
+        // Assert
         #expect(viewModel.name == "Run")
         #expect(viewModel.location == "Bratislava")
         #expect(viewModel.duration == 45)
@@ -34,20 +43,43 @@ struct EditPerformanceViewModelTests {
         (TimeInterval(100_000), 720),
     ])
     func snapsDurationOntoTheStepperGrid(duration: TimeInterval, expected: Int) {
-        let viewModel = makeViewModel(for: .stub(duration: duration))
+        // Arrange
+        let performance = SportPerformance.stub(duration: duration)
 
+        // Act
+        let viewModel = makeViewModel(for: performance)
+
+        // Assert
         #expect(viewModel.duration == expected)
     }
 
     @Test
     func prefilledDurationAlwaysSatisfiesValidation() {
-        let viewModel = makeViewModel(for: .stub(duration: 90))
+        // Arrange
+        let performance = SportPerformance.stub(duration: 90)
 
+        // Act
+        let viewModel = makeViewModel(for: performance)
+
+        // Assert
         #expect(viewModel.isSaveEnabled)
     }
 
     @Test
+    func prefillsTheCoordinateFromTheStoredPerformance() {
+        // Arrange
+        let performance = SportPerformance.stub(coordinate: kosice)
+
+        // Act
+        let viewModel = makeViewModel(for: performance)
+
+        // Assert
+        #expect(viewModel.coordinate == kosice)
+    }
+
+    @Test
     func savePreservesIdentityStorageAndCreationDate() async throws {
+        // Arrange
         let original = SportPerformance.stub(
             storage: .remote,
             createdAt: Date(timeIntervalSince1970: 4_242)
@@ -55,9 +87,11 @@ struct EditPerformanceViewModelTests {
         let viewModel = makeViewModel(for: original)
         viewModel.name = "  Evening swim "
 
+        // Act
         let didSave = await viewModel.save()
-        let updated = try #require(repository.updatedPerformances.first)
 
+        // Assert
+        let updated = try #require(repository.updatedPerformances.first)
         #expect(didSave)
         #expect(updated.id == original.id)
         #expect(updated.storage == .remote)
@@ -66,58 +100,57 @@ struct EditPerformanceViewModelTests {
     }
 
     @Test
-    func prefillsTheCoordinateFromTheStoredPerformance() {
-        let coordinate = PerformanceCoordinate(latitude: 48.7164, longitude: 21.2611)
-        let viewModel = makeViewModel(for: .stub(coordinate: coordinate))
-
-        #expect(viewModel.coordinate == coordinate)
-    }
-
-    @Test
     func saveCarriesAChangedCoordinate() async throws {
-        let viewModel = makeViewModel(
-            for: .stub(coordinate: PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077))
-        )
-        let moved = PerformanceCoordinate(latitude: 48.7164, longitude: 21.2611)
-        viewModel.coordinate = moved
+        // Arrange
+        let viewModel = makeViewModel(for: .stub(coordinate: bratislava))
+        viewModel.coordinate = kosice
 
+        // Act
         _ = await viewModel.save()
-        let updated = try #require(repository.updatedPerformances.first)
 
-        #expect(updated.coordinate == moved)
+        // Assert
+        let updated = try #require(repository.updatedPerformances.first)
+        #expect(updated.coordinate == kosice)
     }
 
     @Test
     func clearingTheCoordinateIsPersisted() async throws {
-        let viewModel = makeViewModel(
-            for: .stub(coordinate: PerformanceCoordinate(latitude: 48.1486, longitude: 17.1077))
-        )
+        // Arrange
+        let viewModel = makeViewModel(for: .stub(coordinate: bratislava))
         viewModel.coordinate = nil
 
+        // Act
         _ = await viewModel.save()
-        let updated = try #require(repository.updatedPerformances.first)
 
+        // Assert
+        let updated = try #require(repository.updatedPerformances.first)
         #expect(updated.coordinate == nil)
     }
 
     @Test
     func savingABlankNameIsRejected() async {
+        // Arrange
         let viewModel = makeViewModel(for: .stub())
         viewModel.name = "   "
 
+        // Act
         let didSave = await viewModel.save()
 
+        // Assert
         #expect(!didSave)
         #expect(repository.updatedPerformances.isEmpty)
     }
 
     @Test
     func saveFailureReportsAnError() async {
+        // Arrange
         let viewModel = makeViewModel(for: .stub())
         repository.writeError = StubSportPerformanceRepository.Failure.write
 
+        // Act
         let didSave = await viewModel.save()
 
+        // Assert
         #expect(!didSave)
         #expect(viewModel.errorMessage != nil)
     }

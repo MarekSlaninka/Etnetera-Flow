@@ -12,6 +12,7 @@ final class PerformanceListViewModel {
     }
     private(set) var performances: [SportPerformance] = []
     private(set) var errorMessage: String?
+    private(set) var isLoading = true
 
     var isSearching: Bool {
         !searchQuery.isEmpty
@@ -33,12 +34,16 @@ final class PerformanceListViewModel {
     }
 
     func observePerformances() {
+        isLoading = true
+
         observer.start(
             onUpdate: { [weak self] performances in
                 self?.allPerformances = performances
+                self?.isLoading = false
             },
             onError: { [weak self] error in
                 self?.errorMessage = error.localizedDescription
+                self?.isLoading = false
             }
         )
     }

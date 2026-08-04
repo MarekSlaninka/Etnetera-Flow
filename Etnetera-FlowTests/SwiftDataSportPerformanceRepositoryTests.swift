@@ -16,23 +16,34 @@ struct SwiftDataSportPerformanceRepositoryTests {
         repository = SwiftDataSportPerformanceRepository(modelContext: container.mainContext)
     }
 
-    @Test
-    func savedPerformanceReachesObservers() async throws {
+    private func observe() async throws -> PerformanceRecorder {
         let recorder = PerformanceRecorder()
-        let performance = SportPerformance.stub(name: "Run")
 
         _ = try await repository.observePerformances(
             onUpdate: { recorder.record($0) },
             onError: { recorder.record($0) }
         )
+
+        return recorder
+    }
+
+    @Test
+    func savedPerformanceReachesObservers() async throws {
+        // Arrange
+        let recorder = try await observe()
+        let performance = SportPerformance.stub(name: "Run")
+
+        // Act
         try await repository.save(performance)
 
+        // Assert
         #expect(recorder.latest == [performance])
     }
 
     @Test
     func observationEmitsNewestFirst() async throws {
-        let recorder = PerformanceRecorder()
+        // Arrange
+        let recorder = try await observe()
         let older = SportPerformance.stub(
             name: "Older",
             createdAt: Date(timeIntervalSince1970: 1_000)
@@ -42,27 +53,20 @@ struct SwiftDataSportPerformanceRepositoryTests {
             createdAt: Date(timeIntervalSince1970: 2_000)
         )
 
-        _ = try await repository.observePerformances(
-            onUpdate: { recorder.record($0) },
-            onError: { recorder.record($0) }
-        )
+        // Act
         try await repository.save(older)
         try await repository.save(newer)
 
+        // Assert
         #expect(recorder.latest.map(\.name) == ["Newer", "Older"])
     }
 
     @Test
     func updateChangesEditableFieldsAndKeepsCreationDate() async throws {
-        let recorder = PerformanceRecorder()
+        // Arrange
+        let recorder = try await observe()
         let original = SportPerformance.stub(name: "Run", location: "Bratislava")
-
-        _ = try await repository.observePerformances(
-            onUpdate: { recorder.record($0) },
-            onError: { recorder.record($0) }
-        )
         try await repository.save(original)
-
         let edited = SportPerformance.stub(
             id: original.id,
             name: "Evening run",
@@ -70,8 +74,11 @@ struct SwiftDataSportPerformanceRepositoryTests {
             duration: 3_600,
             createdAt: Date(timeIntervalSince1970: 9_999)
         )
+
+        // Act
         try await repository.update(edited)
 
+        // Assert
         let stored = try #require(recorder.latest.first)
         #expect(stored.name == "Evening run")
         #expect(stored.location == "Košice")
@@ -81,58 +88,55 @@ struct SwiftDataSportPerformanceRepositoryTests {
 
     @Test
     func updatingUnknownPerformanceIsIgnored() async throws {
-        let recorder = PerformanceRecorder()
+        // Arrange
+        let recorder = try await observe()
 
-        _ = try await repository.observePerformances(
-            onUpdate: { recorder.record($0) },
-            onError: { recorder.record($0) }
-        )
+        // Act
         try await repository.update(.stub(name: "Never saved"))
 
+        // Assert
         #expect(recorder.latest.isEmpty)
     }
 
     @Test
     func deleteRemovesPerformance() async throws {
-        let recorder = PerformanceRecorder()
+        // Arrange
+        let recorder = try await observe()
         let performance = SportPerformance.stub()
-
-        _ = try await repository.observePerformances(
-            onUpdate: { recorder.record($0) },
-            onError: { recorder.record($0) }
-        )
         try await repository.save(performance)
+
+        // Act
         try await repository.delete(performance)
 
+        // Assert
         #expect(recorder.latest.isEmpty)
     }
 
     @Test
     func cancelledObservationStopsReceivingUpdates() async throws {
+        // Arrange
         let recorder = PerformanceRecorder()
-
         let observation = try await repository.observePerformances(
             onUpdate: { recorder.record($0) },
             onError: { recorder.record($0) }
         )
         observation.cancel()
-
         let updatesBeforeSave = recorder.updates.count
+
+        // Act
         try await repository.save(.stub())
 
+        // Assert
         #expect(recorder.updates.count == updatesBeforeSave)
     }
 
     @Test
     func returnsEveryStoredPerformanceNewestFirst() async throws {
-        let recorder = PerformanceRecorder()
+        // Arrange
+        let recorder = try await observe()
         let count = 250
 
-        _ = try await repository.observePerformances(
-            onUpdate: { recorder.record($0) },
-            onError: { recorder.record($0) }
-        )
-
+        // Act
         for index in 0 ..< count {
             try await repository.save(
                 .stub(
@@ -142,6 +146,7 @@ struct SwiftDataSportPerformanceRepositoryTests {
             )
         }
 
+        // Assert
         #expect(recorder.latest.count == count)
         #expect(recorder.latest.first?.name == "Performance \(count - 1)")
         #expect(recorder.latest.last?.name == "Performance 0")
@@ -149,14 +154,13 @@ struct SwiftDataSportPerformanceRepositoryTests {
 
     @Test
     func storedPerformancesAreReportedAsLocal() async throws {
-        let recorder = PerformanceRecorder()
+        // Arrange
+        let recorder = try await observe()
 
-        _ = try await repository.observePerformances(
-            onUpdate: { recorder.record($0) },
-            onError: { recorder.record($0) }
-        )
+        // Act
         try await repository.save(.stub(storage: .local))
 
+        // Assert
         #expect(recorder.latest.allSatisfy { $0.storage == .local })
     }
 }
